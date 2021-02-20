@@ -1,0 +1,60 @@
+.header {
+    background-color: #409EFF;
+    width: 100vw;
+    height: 300rpx;
+    margin-bottom: 8rpx;
+    display: flex;
+    color: #fff;
+}
+
+.middle {
+    flex: 1;
+    text-align: center;
+    margin-top: 50rpx;
+}
+
+.middle image {
+    display: inline-block;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    margin-bottom: 20rpx;
+}
+
+.left {
+    width: 220rpx;
+    height: 100%;
+    text-align: center;
+}
+
+.child {
+    height: 120rpx;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.child view {
+    height: 40rpx;
+    line-height: 40rpx;
+}
+
+.right {
+    width: 220rpx;
+    height: 100%;
+    text-align: center;
+}
+
+.recharge {
+    margin: 0 auto;
+    width: 120rpx;
+    border: 1rpx solid #eee;
+    border-radius: 20rpx;
+    text-align: center;
+}
+
+.fontColor {
+    color: rgb(254, 193, 48);
+    font-weight: 600;
+    font-size: 26rpx;
+}

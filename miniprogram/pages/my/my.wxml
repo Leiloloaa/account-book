@@ -1,0 +1,46 @@
+<view class="header">
+	<view class="middle">
+		<image
+		 class="userinfo-avatar"
+		 src="{{avatarUrl}}"
+		 mode="cover"
+		></image>
+		<view class="userinfo-nickname">{{userInfo.nickName}}</view>
+	</view>
+</view>
+<van-grid column-num="3">
+	<van-grid-item use-slot>
+		<text class="text-grey text-lg text-bold">￥88888.00</text>
+		<text class="text-grey text-df">金库余额</text>
+	</van-grid-item>
+	<van-grid-item use-slot>
+		<text class="text-grey text-lg text-bold">￥20000.00</text>
+		<text class="text-grey text-df">月总支出</text>
+	</van-grid-item>
+	<van-grid-item use-slot>
+		<text class="text-grey text-lg text-bold">￥5000.00</text>
+		<text class="text-grey text-df">计划支出</text>
+	</van-grid-item>
+</van-grid>
+
+<view class="cu-list menu {{menuBorder?'sm-border':'sm-border'}} {{menuCard?'card-menu margin-top':'card-menu margin-top'}}">
+	<view class="cu-item {{menuArrow?'arrow':'arrow'}}">
+		<view class="content">
+			<text class="cuIcon-circlefill text-olive"></text>
+			<text class="text-grey">鲸鱼计划</text>
+		</view>
+		<view class="action">
+			<view class="cu-tag round bg-purple light">规划</view>
+		</view>
+	</view>
+	<view class="cu-item {{menuArrow?'arrow':'arrow'}}">
+		<view class="content">
+			<text class="cuIcon-tagfill text-blue"></text>
+			<text class="text-grey">关于鲸鱼手记</text>
+		</view>
+		<view class="action">
+			<view class="cu-tag round bg-cyan light">账本</view>
+		</view>
+	</view>
+</view>
+
