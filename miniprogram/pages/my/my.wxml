@@ -10,15 +10,15 @@
 </view>
 <van-grid column-num="3">
 	<van-grid-item use-slot>
-		<text class="text-grey text-lg text-bold">￥88888.00</text>
-		<text class="text-grey text-df">金库余额</text>
+		<text class="text-grey text-lg text-bold">88888.00</text>
+		<text class="text-grey text-df">月总收入</text>
 	</van-grid-item>
 	<van-grid-item use-slot>
-		<text class="text-grey text-lg text-bold">￥20000.00</text>
+		<text class="text-grey text-lg text-bold">20000.00</text>
 		<text class="text-grey text-df">月总支出</text>
 	</van-grid-item>
 	<van-grid-item use-slot>
-		<text class="text-grey text-lg text-bold">￥5000.00</text>
+		<text class="text-grey text-lg text-bold">5000.00</text>
 		<text class="text-grey text-df">计划支出</text>
 	</van-grid-item>
 </van-grid>
@@ -29,8 +29,17 @@
 			<text class="cuIcon-circlefill text-olive"></text>
 			<text class="text-grey">鲸鱼计划</text>
 		</view>
-		<view class="action">
-			<view class="cu-tag round bg-purple light">规划</view>
+	</view>
+	<view class="cu-item {{menuArrow?'arrow':'arrow'}}">
+		<view class="content">
+			<text class="cuIcon-btn text-orange"></text>
+			<text class="text-grey">账单图表</text>
+		</view>
+	</view>
+	<view class="cu-item {{menuArrow?'arrow':'arrow'}}">
+		<view class="content">
+			<text class="cuIcon-discoverfill text-pink"></text>
+			<text class="text-grey">账单统计</text>
 		</view>
 	</view>
 	<view class="cu-item {{menuArrow?'arrow':'arrow'}}">
@@ -38,9 +47,48 @@
 			<text class="cuIcon-tagfill text-blue"></text>
 			<text class="text-grey">关于鲸鱼手记</text>
 		</view>
-		<view class="action">
-			<view class="cu-tag round bg-cyan light">账本</view>
-		</view>
 	</view>
 </view>
+
+<view class="tip" bind:tap="showPro">
+	《鲸鱼手帐隐私保护说明》
+</view>
+
+<van-popup
+ show="{{ show }}"
+ round
+ position="bottom"
+ custom-style="height: 50%"
+ bind:close="onClose"
+>
+	<view>
+		<view style="text-align:center" class="margin-lg">
+			鲸鱼手帐隐私保护说明
+		</view>
+
+		本指引是鲸鱼手帐小程序开发者收集、使用和存储你的信息而制定。
+
+		开发者收集的信息根据法律规定，开发者仅收集实现小程序功能所必要的信息。
+		收集你的用户信息（微信昵称、头像、性别、地区），用于功能展示
+		收集你的摄像头，用于填写用户信息
+		开发者对信息的存储
+		存储地点境内
+		存储期限小程序停止运营后及时删除
+		信息的使用规则
+		开发者将会在本指引所涵盖的用途内使用收集的信息。
+
+		如开发者使用你的信息超出本指引目的或合理范围，会及时更新本指引，同时，开发者在使用你的信息前，再次以小程序浮窗等方式告知并征得你的明示同意
+
+		信息对外提供
+		开发者承诺
+
+		- 不会主动共享或转让你的信息至任何第三方，如存在确需共享或转让时，开发者应当直接或确认第三方征得你的明示同意。
+
+		- 不会对外公开披露你的信息，如必须公开披露时，开发者应当向你告知公开披露的目的、披露信息的类型及可能涉及的信息，并征得你的明示同意
+
+		若你认为开发者未遵守上述约定，或有其他的投诉建议、未成年人个人信息相关问题，可通过以下方式与开发者联系；或者向微信进行投诉。
+
+		邮箱leiloloaa@163.com
+	</view>
+</van-popup>
 

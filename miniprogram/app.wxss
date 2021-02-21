@@ -2,9 +2,30 @@
 
 @import "colorui/main.wxss";
 @import "colorui/icon.wxss";
-.tabbars {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 999;
+.van-grid-item__content1 {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 16px 8px;
+    padding: var(--grid-item-content-padding, 16px 8px);
+    background-color: #f9f9f9 !important;
+    background-color: var(--grid-item-content-background-color, #f9f9f9) !important;
+    border-radius: 50%;
+}
+
+.van-grid-item__avtive {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 16px 8px;
+    padding: var(--grid-item-content-padding, 16px 8px);
+    background-color: #69EAFF !important;
+    background-color: var(--grid-item-content-background-color, #69EAFF) !important;
+    border-radius: 50%;
 }

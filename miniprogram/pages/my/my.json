@@ -1,8 +1,4 @@
 {
-  "navigationBarTitleText": "",
-  "navigationStyle": "default",
-  "enablePullDownRefresh": false,
-  "onReachBottomDistance": 50,
-  "disableScroll": false,
-  "usingComponents": {}
+    "navigationBarTitleText": "个人中心",
+    "usingComponents": {}
 }

@@ -1,0 +1,68 @@
+<view class="header padding-sm">
+	<view class="left">
+		<view class="title margin-bottom-sm">
+			{{year}}年
+		</view>
+		<view class="" bind:tap="showData">
+			{{month}}月
+			<image src="../../assets/sel.svg" style="display:inline-block; vertical-align: middle; text-align:center;width:20px;height:20px;line-height:50px;"></image>
+		</view>
+	</view>
+	<view class="middle">
+		<view class="title margin-bottom-sm">
+			收入
+		</view>
+		<view class="">
+			0.00
+		</view>
+	</view>
+	<view class="right">
+		<view class="title margin-bottom-sm">
+			支出
+		</view>
+		<view class="">
+			0.00
+		</view>
+	</view>
+</view>
+
+<view class="details margin-top-sm">
+	<view class="details_title padding-bottom-sm">
+		<view class="margin-left-sm">
+			02月21日 星期日
+		</view>
+		<view class="margin-right-sm">
+			收入：20
+			支出：10
+		</view>
+	</view>
+	<view class="details_item padding-top-sm">
+		<view class="margin-left-sm item_img margin-right-sm">
+			<image style="width:50%; height:50%;" src="../../assets/icon/1.png" />
+		</view>
+		<view class="margin-right-sm item_content">
+			<view class="">
+				工资
+			</view>
+			<view class="">
+				20
+			</view>
+		</view>
+	</view>
+</view>
+
+<van-popup
+ show="{{ show }}"
+ round
+ position="bottom"
+ custom-style="height:45%"
+>
+	<van-datetime-picker
+	 type="year-month"
+	 value="{{ currentDate }}"
+	 bind:confirm="onConfirm"
+	 bind:close="onClose"
+	 formatter="{{ formatter }}"
+	/>
+</van-popup>
+

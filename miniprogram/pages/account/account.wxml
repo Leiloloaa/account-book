@@ -1,0 +1,219 @@
+<van-tabs
+ type="card"
+ sticky
+ color="#69EAFF"
+ custom-class="margin-top-lg"
+>
+	<van-tab title="支出" custom-class="margin-top-lg">
+		<van-grid gutter="{{ 10 }}" column-num="4">
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 01 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="01"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/1.png" />
+				<text class="text-grey text-sm">餐饮</text>
+			</van-grid-item>
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 02 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="02"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/2.png" />
+				<text class="text-grey text-sm">购物</text>
+			</van-grid-item>
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 03 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="03"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/3.png" />
+				<text class="text-grey text-sm">肉菜</text>
+			</van-grid-item>
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 04 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="04"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/4.png" />
+				<text class="text-grey text-sm">交通</text>
+			</van-grid-item>
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 05 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="05"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/5.png" />
+				<text class="text-grey text-sm">其它</text>
+			</van-grid-item>
+		</van-grid>
+	</van-tab>
+	<van-tab title="收入" custom-class="margin-top-lg">
+		<van-grid gutter="{{ 10 }}" column-num="4">
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 06 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="06"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/01.png" />
+				<text class="text-grey text-sm">工资</text>
+			</van-grid-item>
+			<van-grid-item
+			 use-slot
+			 content-class="van-grid-item__content1 {{type == 07 ? 'van-grid-item__avtive':''}}"
+			 bind:tap="show"
+			 data-type="07"
+			>
+				<image style="width: 50%; height:30px;" src="../../assets/icon/02.png" />
+				<text class="text-grey text-sm">其它</text>
+			</van-grid-item>
+		</van-grid>
+	</van-tab>
+</van-tabs>
+
+<view class="key_container" wx:if="{{show_key}}">
+	<view class="key_01 margin-left-lg margin-right-lg">
+		<view class="key01_item">
+			<van-field
+			 placeholder="备注"
+			 value="{{ remark }}"
+			 border="{{ false }}"
+			 bind:change="getRemark"
+			 maxlength="10"
+			/>
+		</view>
+		<view class="key01_item">
+			{{value}}
+		</view>
+	</view>
+	<view class="key_02">
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="7"
+		>
+			7
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="8"
+		>
+			8
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="9"
+		>
+			9
+		</view>
+		<view class="key_item" bind:tap="showData">
+			{{input_data}}
+		</view>
+	</view>
+	<view class="key_03">
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="4"
+		>
+			4
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="5"
+		>
+			5
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="6"
+		>
+			6
+		</view>
+		<view class="key_item" bind:tap="addValue">
+			+
+		</view>
+	</view>
+	<view class="key_04">
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="1"
+		>
+			1
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="2"
+		>
+			2
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="3"
+		>
+			3
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="subValue"
+		 data-type="-"
+		>
+			-
+		</view>
+	</view>
+	<view class="key_05">
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="."
+		>
+			.
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="getValue"
+		 data-type="0"
+		>
+			0
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="delValue"
+		 data-type="退格"
+		>
+			退格
+		</view>
+		<view class="key_item" bind:tap="finishValue">
+			完成
+		</view>
+	</view>
+</view>
+
+<van-popup
+ show="{{ show }}"
+ round
+ position="bottom"
+ custom-style="height:45%"
+>
+	<van-datetime-picker
+	 type="date"
+	 value="{{ currentDate }}"
+	 bind:confirm="onConfirm"
+	 bind:close="onClose"
+	 formatter="{{ formatter }}"
+	/>
+</van-popup>
+

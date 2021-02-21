@@ -1,8 +1,7 @@
 .header {
-    background-color: #409EFF;
+    background-color: #69EAFF;
     width: 100vw;
     height: 300rpx;
-    margin-bottom: 8rpx;
     display: flex;
     color: #fff;
 }
@@ -57,4 +56,13 @@
     color: rgb(254, 193, 48);
     font-weight: 600;
     font-size: 26rpx;
+}
+
+.tip {
+    position: fixed;
+    bottom: 5px;
+    width: 100vw;
+    text-align: center;
+    color: #969799;
+    font-size: 13px;
 }

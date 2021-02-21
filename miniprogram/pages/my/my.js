@@ -8,7 +8,8 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        modalName: ''
+        modalName: '',
+        show: false
     },
     onLoad: function() {
         // 获取用户信息
@@ -37,5 +38,13 @@ Page({
         this.setData({
             modalName: null
         })
+    },
+    showPro() {
+        this.setData({
+            show: true
+        })
+    },
+    onClose() {
+        this.setData({ show: false });
     },
 })

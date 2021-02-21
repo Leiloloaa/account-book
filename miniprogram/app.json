@@ -1,5 +1,7 @@
 {
     "pages": [
+        "pages/home/home",
+        "pages/account/account",
         "pages/my/my",
         "pages/index/index",
         "pages/userConsole/userConsole",
@@ -16,33 +18,33 @@
         "pages/im/room/room"
     ],
     "window": {
-        "backgroundColor": "#F6F6F6",
+        "backgroundColor": "#ffffff",
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "🐋鲸鱼手记",
+        "navigationBarBackgroundColor": "#69EAFF",
+        "navigationBarTitleText": "鲸鱼手记",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
         "backgroundColor": "white",
         "borderStyle": "white",
-        "color": "black",
-        "selectedColor": "rgb(11, 187, 9)",
+        "color": "#cdcdcd",
+        "selectedColor": "#69EAFF",
         "list": [{
-                "pagePath": "pages/index/index",
-                "iconPath": "assets/icon/home.png",
-                "selectedIconPath": "assets/icon/home-selected.png",
+                "pagePath": "pages/home/home",
+                "iconPath": "assets/icon/home0.png",
+                "selectedIconPath": "assets/icon/home.png",
                 "text": "首页"
             },
             {
-                "pagePath": "pages/index/index",
-                "iconPath": "assets/icon/pub.png",
-                "selectedIconPath": "assets/icon/pub-selected.png",
+                "pagePath": "pages/account/account",
+                "iconPath": "assets/icon/add0.png",
+                "selectedIconPath": "assets/icon/add.png",
                 "text": "记账"
             },
             {
                 "pagePath": "pages/my/my",
-                "iconPath": "assets/icon/my.png",
-                "selectedIconPath": "assets/icon/my-selected.png",
+                "iconPath": "assets/icon/my0.png",
+                "selectedIconPath": "assets/icon/my.png",
                 "text": "我的"
             }
         ]
@@ -51,6 +53,11 @@
     "usingComponents": {
         "van-button": "./dist/button/index",
         "van-grid": "./dist/grid/index",
-        "van-grid-item": "./dist/grid-item/index"
+        "van-grid-item": "./dist/grid-item/index",
+        "van-tab": "./dist/tab/index",
+        "van-tabs": "./dist/tabs/index",
+        "van-field": "./dist/field/index",
+        "van-popup": "./dist/popup/index",
+        "van-datetime-picker": "./dist/datetime-picker/index"
     }
 }
