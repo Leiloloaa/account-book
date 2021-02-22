@@ -29,7 +29,9 @@ Page({
 
     getRemark(event) {
         // event.detail 为当前输入的值
-        console.log(event.detail);
+        this.setData({
+            remark: event.detail,
+        })
     },
 
     getValue(res) {
@@ -136,15 +138,36 @@ Page({
         }
     },
 
-
     finishValue() {
         console.log(this.data.value + '--' + this.data.type)
-        this.setData({
-            show_key: false,
-            value: '',
-            temp1_value: '',
-            temp2_value: '',
+        const db = wx.cloud.database()
+        db.collection('day_consume').add({
+            data: {
+                consume_type: this.data.type,
+                consume_time: this.data.input_data,
+                consume_value: this.data.value,
+                consume_remark: this.data.remark
+            },
+            success: res => {
+                this.setData({
+                    show_key: false,
+                    value: '',
+                    temp1_value: '',
+                    temp2_value: '',
+                })
+                wx.showToast({
+                    title: '新增成功',
+                })
+            },
+            fail: err => {
+                wx.showToast({
+                    icon: 'none',
+                    title: '新增记录失败'
+                })
+                console.error('[数据库] [新增记录] 失败：', err)
+            }
         })
+
     },
 
     show(event) {

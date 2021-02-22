@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/account/account",
         "pages/home/home",
+        "pages/account/account",
         "pages/my/my",
         "pages/index/index",
         "pages/userConsole/userConsole",
@@ -58,6 +58,7 @@
         "van-tabs": "./dist/tabs/index",
         "van-field": "./dist/field/index",
         "van-popup": "./dist/popup/index",
-        "van-datetime-picker": "./dist/datetime-picker/index"
+        "van-datetime-picker": "./dist/datetime-picker/index",
+        "van-empty": "./dist/empty/index"
     }
 }

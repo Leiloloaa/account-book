@@ -9,7 +9,7 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         modalName: '',
-        show: false
+        show: false,
     },
     onLoad: function() {
         // 获取用户信息
