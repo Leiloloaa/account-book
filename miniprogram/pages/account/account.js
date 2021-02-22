@@ -6,7 +6,9 @@ Page({
      */
     data: {
         remark: '',
-        value: '',
+        value: 0,
+        temp1_value: '',
+        temp2_value: '',
         type: '',
         show_key: false,
         show: false,
@@ -20,6 +22,9 @@ Page({
             }
             return value;
         },
+        isAdd: true,
+        showEqu: false,
+        today: true
     },
 
     getRemark(event) {
@@ -28,27 +33,72 @@ Page({
     },
 
     getValue(res) {
-        this.setData({
-            value: this.data.value + res.target.dataset.type,
-        })
-        console.log(this.data.value);
+        if (this.data.temp1_value) {
+            if (this.data.isAdd) {
+                this.setData({
+                    value: this.data.temp1_value + '+',
+                    temp2_value: res.target.dataset.type + this.data.temp2_value
+                })
+                this.setData({
+                    value: this.data.temp1_value + '+' + this.data.temp2_value,
+                })
+            } else {
+                this.setData({
+                    value: this.data.temp1_value + '-',
+                    temp2_value: res.target.dataset.type + this.data.temp2_value
+                })
+                this.setData({
+                    value: this.data.temp1_value + '-' + this.data.temp2_value,
+                })
+            }
+        } else {
+            let temp = (this.data.value + res.target.dataset.type).replace(/^[0]/g,  "")
+            this.setData({
+                value: temp
+            })
+        }
     },
 
     addValue() {
         this.setData({
-            value: ++this.data.value,
+            isAdd: true,
+            showEqu: true,
         })
+        if (this.data.temp1_value) {
+            this.setData({
+                value: Number(this.data.temp1_value) + Number(this.data.temp2_value),
+                temp1_value: this.data.value,
+                temp2_value: '',
+            })
+            this.setData({
+                temp1_value: this.data.value,
+            })
+        } else {
+            this.setData({
+                temp1_value: this.data.value,
+                value: this.data.value + '+'
+            })
+        }
     },
 
     subValue() {
-        if (this.data.value == 0) {
+        this.setData({
+            isAdd: false,
+            showEqu: true,
+        })
+        if (this.data.temp1_value) {
             this.setData({
-                value: 0,
+                value: Number(this.data.temp1_value) - Number(this.data.temp2_value),
+                temp1_value: this.data.value,
+                temp2_value: '',
+            })
+            this.setData({
+                temp1_value: this.data.value,
             })
         } else {
-            let temp = Number(this.data.value)
             this.setData({
-                value: --temp,
+                temp1_value: this.data.value,
+                value: this.data.value + '-'
             })
         }
     },
@@ -66,11 +116,34 @@ Page({
         }
     },
 
+    equValue() {
+        this.setData({
+            showEqu: false,
+        })
+
+        if (this.data.isAdd) {
+            this.setData({
+                value: Number(this.data.temp1_value) + Number(this.data.temp2_value),
+                temp1_value: '',
+                temp2_value: '',
+            })
+        } else {
+            this.setData({
+                value: Number(this.data.temp1_value) - Number(this.data.temp2_value),
+                temp1_value: '',
+                temp2_value: '',
+            })
+        }
+    },
+
+
     finishValue() {
         console.log(this.data.value + '--' + this.data.type)
         this.setData({
             show_key: false,
-            value: ''
+            value: '',
+            temp1_value: '',
+            temp2_value: '',
         })
     },
 
@@ -80,6 +153,7 @@ Page({
             type: event.currentTarget.dataset.type
         })
     },
+
     showData() {
         this.setData({
             show: true,
@@ -87,22 +161,30 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function(options) {
         let nowTime = this.changeTime(new Date().getTime())
         this.setData({
             input_data: nowTime
         })
     },
+
     onConfirm(event) {
+        if (this.changeTime(event.detail) != this.changeTime(new Date().getTime())) {
+            this.setData({
+                today: false,
+            })
+        } else {
+            this.setData({
+                today: true,
+            })
+        }
         this.setData({
             show: false,
             show_key: true,
             input_data: this.changeTime(event.detail)
         })
     },
+
     changeTime(time) {
         if (time) {
             var oDate = new Date(time * 1),

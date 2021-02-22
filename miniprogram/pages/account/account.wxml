@@ -5,7 +5,11 @@
  custom-class="margin-top-lg"
 >
 	<van-tab title="支出" custom-class="margin-top-lg">
-		<van-grid gutter="{{ 10 }}" column-num="4">
+		<van-grid
+		 gutter="{{ 10 }}"
+		 column-num="4"
+		 border='false'
+		>
 			<van-grid-item
 			 use-slot
 			 content-class="van-grid-item__content1 {{type == 01 ? 'van-grid-item__avtive':''}}"
@@ -54,7 +58,11 @@
 		</van-grid>
 	</van-tab>
 	<van-tab title="收入" custom-class="margin-top-lg">
-		<van-grid gutter="{{ 10 }}" column-num="4">
+		<van-grid
+		 gutter="{{ 10 }}"
+		 column-num="4"
+		 border='false'
+		>
 			<van-grid-item
 			 use-slot
 			 content-class="van-grid-item__content1 {{type == 06 ? 'van-grid-item__avtive':''}}"
@@ -114,7 +122,18 @@
 		>
 			9
 		</view>
-		<view class="key_item" bind:tap="showData">
+		<view
+		 class="key_item_del"
+		 bind:tap="showData"
+		 wx:if="{{today}}"
+		>
+			<image style="width: 32%; height:30px;" src="../../assets/today.png" />
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="showData"
+		 wx:if="{{!today}}"
+		>
 			{{input_data}}
 		</view>
 	</view>
@@ -190,14 +209,25 @@
 			0
 		</view>
 		<view
-		 class="key_item"
+		 class="key_item_del"
 		 bind:tap="delValue"
 		 data-type="退格"
 		>
-			退格
+			<image style="width: 32%; height:18px;" src="../../assets/del.png" />
 		</view>
-		<view class="key_item" bind:tap="finishValue">
+		<view
+		 class="key_item"
+		 bind:tap="finishValue"
+		 wx:if='{{!showEqu}}'
+		>
 			完成
+		</view>
+		<view
+		 class="key_item"
+		 bind:tap="equValue"
+		 wx:if='{{showEqu}}'
+		>
+			=
 		</view>
 	</view>
 </view>
@@ -206,13 +236,14 @@
  show="{{ show }}"
  round
  position="bottom"
+ bind:close="onClose"
  custom-style="height:45%"
 >
 	<van-datetime-picker
 	 type="date"
 	 value="{{ currentDate }}"
 	 bind:confirm="onConfirm"
-	 bind:close="onClose"
+	 bind:cancel="onClose"
 	 formatter="{{ formatter }}"
 	/>
 </van-popup>

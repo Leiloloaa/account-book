@@ -23,7 +23,50 @@
 .key_item {
     width: 25%;
     text-align: center;
-    border: 1px solid #DFDFDF;
+    border-top: 1px solid #DFDFDF;
+}
+
+.key_item_del {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #DFDFDF;
+    justify-content: center;
+}
+
+
+/*最后一个元素及每行末元素拥有右边框*/
+
+.key_02 :nth-child(n) {
+    border-right: 1px solid #DFDFDF;
+}
+
+.key_02 :last-child {
+    border-right: none;
+}
+
+.key_03 :nth-child(n) {
+    border-right: 1px solid #DFDFDF;
+}
+
+.key_03 :last-child {
+    border-right: none;
+}
+
+.key_04 :nth-child(n) {
+    border-right: 1px solid #DFDFDF;
+}
+
+.key_04 :last-child {
+    border-right: none;
+}
+
+.key_05 :nth-child(n) {
+    border-right: 1px solid #DFDFDF;
+}
+
+.key_05 :last-child {
+    border-right: none;
 }
 
 .key_05 :nth-child(4) {
