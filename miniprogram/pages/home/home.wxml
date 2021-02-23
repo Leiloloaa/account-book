@@ -26,7 +26,7 @@
 	</view>
 </view>
 
-<view class="details margin-top-sm" wx:if="{{!isEmpty}}">
+<view class="details margin-top-sm">
 	<view class="details_title padding-bottom-sm">
 		<view class="margin-left-sm">
 			{{nowTime}}
@@ -103,7 +103,161 @@
 		</view>
 	</view>
 </view>
-<van-empty description="没有记录" wx:if="{{isEmpty}}" />
+<view class="details margin-top-sm">
+	<view class="details_title padding-bottom-sm">
+		<view class="margin-left-sm">
+			{{nowTime1}}
+		</view>
+		<view class="margin-right-sm">
+			<text wx:if='{{omoney1 !== 0}}' decode="{{true}}">收入：{{omoney1}} &nbsp; &nbsp; &nbsp; &nbsp;</text>
+			<text>支出：{{imoney1}}</text>
+		</view>
+	</view>
+	<view
+	 class="details_item padding-top-sm"
+	 wx:for="{{list1}}"
+	 wx:key='index'
+	>
+		<view
+		 class="margin-left-sm item_img margin-right-sm"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 01}}'
+			 src="../../assets/icon/1.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 02}}'
+			 src="../../assets/icon/2.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 03}}'
+			 src="../../assets/icon/3.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 04}}'
+			 src="../../assets/icon/4.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 05}}'
+			 src="../../assets/icon/5.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 06}}'
+			 src="../../assets/icon/01.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 07}}'
+			 src="../../assets/icon/02.png"
+			/>
+		</view>
+		<view
+		 class="margin-right-sm item_content"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
+			<view class="">
+				<text  wx:if='{{item.consume_type == 01}}'>餐饮</text>
+				<text  wx:if='{{item.consume_type == 02}}'>购物</text>
+				<text  wx:if='{{item.consume_type == 03}}'>蔬菜</text>
+				<text  wx:if='{{item.consume_type == 04}}'>交通</text>
+				<text  wx:if='{{item.consume_type == 05}}'>其它</text>
+				<text  wx:if='{{item.consume_type == 06}}'>工资</text>
+				<text  wx:if='{{item.consume_type == 07}}'>其它</text>
+			</view>
+			<view class="">
+				{{item.consume_value}}
+				<text wx:if='{{item.consume_remark}}'class="text-xs">({{item.consume_remark}})</text>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- <view class="details margin-top-sm">
+	<view class="details_title padding-bottom-sm">
+		<view class="margin-left-sm">
+			{{nowTime2}}
+		</view>
+		<view class="margin-right-sm">
+			<text wx:if='{{omoney2 !== 0}}' decode="{{true}}">收入：{{omoney2}} &nbsp; &nbsp; &nbsp; &nbsp;</text>
+			<text>支出：{{imoney2}}</text>
+		</view>
+	</view>
+	<view
+	 class="details_item padding-top-sm"
+	 wx:for="{{list2}}"
+	 wx:key='index'
+	>
+		<view
+		 class="margin-left-sm item_img margin-right-sm"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 01}}'
+			 src="../../assets/icon/1.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 02}}'
+			 src="../../assets/icon/2.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 03}}'
+			 src="../../assets/icon/3.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 04}}'
+			 src="../../assets/icon/4.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 05}}'
+			 src="../../assets/icon/5.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 06}}'
+			 src="../../assets/icon/01.png"
+			/>
+			<image
+			 style="width:50%; height:50%;"
+			 wx:if='{{item.consume_type == 07}}'
+			 src="../../assets/icon/02.png"
+			/>
+		</view>
+		<view
+		 class="margin-right-sm item_content"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
+			<view class="">
+				<text  wx:if='{{item.consume_type == 01}}'>餐饮</text>
+				<text  wx:if='{{item.consume_type == 02}}'>购物</text>
+				<text  wx:if='{{item.consume_type == 03}}'>蔬菜</text>
+				<text  wx:if='{{item.consume_type == 04}}'>交通</text>
+				<text  wx:if='{{item.consume_type == 05}}'>其它</text>
+				<text  wx:if='{{item.consume_type == 06}}'>工资</text>
+				<text  wx:if='{{item.consume_type == 07}}'>其它</text>
+			</view>
+			<view class="">
+				{{item.consume_value}}
+				<text wx:if='{{item.consume_remark}}'class="text-xs">({{item.consume_remark}})</text>
+			</view>
+		</view>
+	</view>
+</view> -->
+<!-- <van-empty description="没有记录" wx:if="{{isEmpty}}" /> -->
 <van-popup
  show="{{ show }}"
  round
