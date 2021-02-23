@@ -35,7 +35,7 @@
 			 data-type="03"
 			>
 				<image style="width: 50%; height:30px;" src="../../assets/icon/3.png" />
-				<text class="text-grey text-sm">肉菜</text>
+				<text class="text-grey text-sm">蔬菜</text>
 			</van-grid-item>
 			<van-grid-item
 			 use-slot

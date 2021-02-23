@@ -21,12 +21,55 @@ Page({
         nowTime: '',
         imoney: 0,
         omoney: 0,
-        isEmpty: false
+        isEmpty: false,
+        showAction: false,
+        actions: [{
+                name: '编辑',
+                value: 1
+            },
+            {
+                name: '删除',
+                color: '#ee0a24',
+                value: 2
+            }
+        ],
+    },
+
+    onSelect(event) {
+        if (event.detail.value == '1') {
+            wx.reLaunch({
+                url: '/pages/account/account?isEdit=true',
+            })
+        } else {
+            let data = wx.getStorageSync('editItem')
+            const db = wx.cloud.database()
+            db.collection('day_consume').doc(data._id).remove({
+                success: res => {
+                    console.log('删除成功')
+                    this.onQuery()
+                },
+                fail: err => {
+                    console.error('[数据库] [删除记录] 失败：', err)
+                }
+            })
+        }
+        console.log(event.detail);
     },
 
     showData() {
         this.setData({
             show: true
+        })
+    },
+
+    showSelect(event) {
+        wx.clearStorage()
+        wx.setStorage({
+            key: 'editItem',
+            data: event.currentTarget.dataset.item,
+        });
+        this.setData({
+            showAction: true
         })
     },
 
@@ -64,7 +107,6 @@ Page({
             imoney: 0,
             omoney: 0,
         })
-        console.log(this.data.nowTime)
         const db = wx.cloud.database()
         db.collection('day_consume').where({ consume_time: this.data.nowTime }).get({
             success: res => {
@@ -114,7 +156,7 @@ Page({
     },
 
     onClose() {
-        this.setData({ show: false });
+        this.setData({ show: false, showAction: false });
     },
 
     changeYearTime(time) {

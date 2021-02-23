@@ -32,8 +32,8 @@
 			{{nowTime}}
 		</view>
 		<view class="margin-right-sm">
-			收入：{{omoney}}
-			支出：{{imoney}}
+			<text wx:if='{{omoney !== 0}}' decode="{{true}}">收入：{{omoney}} &nbsp; &nbsp; &nbsp; &nbsp;</text>
+			<text>支出：{{imoney}}</text>
 		</view>
 	</view>
 	<view
@@ -41,7 +41,11 @@
 	 wx:for="{{list}}"
 	 wx:key='index'
 	>
-		<view class="margin-left-sm item_img margin-right-sm">
+		<view
+		 class="margin-left-sm item_img margin-right-sm"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
 			<image
 			 style="width:50%; height:50%;"
 			 wx:if='{{item.consume_type == 01}}'
@@ -78,12 +82,23 @@
 			 src="../../assets/icon/02.png"
 			/>
 		</view>
-		<view class="margin-right-sm item_content">
+		<view
+		 class="margin-right-sm item_content"
+		 bind:tap="showSelect"
+		 data-item="{{item}}"
+		>
 			<view class="">
-				{{item.consume_remark}}
+				<text  wx:if='{{item.consume_type == 01}}'>餐饮</text>
+				<text  wx:if='{{item.consume_type == 02}}'>购物</text>
+				<text  wx:if='{{item.consume_type == 03}}'>蔬菜</text>
+				<text  wx:if='{{item.consume_type == 04}}'>交通</text>
+				<text  wx:if='{{item.consume_type == 05}}'>其它</text>
+				<text  wx:if='{{item.consume_type == 06}}'>工资</text>
+				<text  wx:if='{{item.consume_type == 07}}'>其它</text>
 			</view>
 			<view class="">
 				{{item.consume_value}}
+				<text wx:if='{{item.consume_remark}}'class="text-xs">({{item.consume_remark}})</text>
 			</view>
 		</view>
 	</view>
@@ -104,4 +119,10 @@
 	 formatter="{{ formatter }}"
 	/>
 </van-popup>
+<van-action-sheet
+ show="{{ showAction }}"
+ actions="{{ actions }}"
+ bind:close="onClose"
+ bind:select="onSelect"
+/>
 

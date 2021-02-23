@@ -59,6 +59,7 @@
         "van-field": "./dist/field/index",
         "van-popup": "./dist/popup/index",
         "van-datetime-picker": "./dist/datetime-picker/index",
-        "van-empty": "./dist/empty/index"
+        "van-empty": "./dist/empty/index",
+        "van-action-sheet": "./dist/action-sheet/index"
     }
 }

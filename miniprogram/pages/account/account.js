@@ -24,7 +24,8 @@ Page({
         },
         isAdd: true,
         showEqu: false,
-        today: true
+        today: true,
+        haveEdit: false
     },
 
     getRemark(event) {
@@ -139,6 +140,18 @@ Page({
     },
 
     finishValue() {
+        if (this.data.haveEdit) {
+            let data = wx.getStorageSync('editItem')
+            const db = wx.cloud.database()
+            db.collection('day_consume').doc(data._id).remove({
+                success: res => {
+                    wx.clearStorage()
+                },
+                fail: err => {
+                    console.error('[数据库] [删除记录] 失败：', err)
+                }
+            })
+        }
         console.log(this.data.value + '--' + this.data.type)
         const db = wx.cloud.database()
         db.collection('day_consume').add({
@@ -157,6 +170,9 @@ Page({
                 })
                 wx.showToast({
                     title: '新增成功',
+                })
+                wx.reLaunch({
+                    url: '/pages/home/home',
                 })
             },
             fail: err => {
@@ -185,10 +201,23 @@ Page({
     },
 
     onLoad: function(options) {
-        let nowTime = this.changeTime(new Date().getTime())
-        this.setData({
-            input_data: nowTime
-        })
+        if (options.isEdit) {
+            let data = wx.getStorageSync('editItem')
+            this.setData({
+                show_key: true,
+                value: data.consume_value,
+                type: data.consume_type,
+                input_data: data.consume_time,
+                remark: data.consume_remark,
+                haveEdit: true
+            });
+        } else {
+            let nowTime = this.changeTime(new Date().getTime())
+            this.setData({
+                input_data: nowTime
+            })
+        }
+
     },
 
     onConfirm(event) {
