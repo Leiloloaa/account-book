@@ -1,0 +1,76 @@
+<view class="padding-right padding-left bg-white">
+	<view class="flex padding-left-sm padding-right-sm padding-top-sm justify-between text-sm">
+		<text>02月总预算</text>
+		<text bind:tap="showAlert">编辑</text>
+	</view>
+	<view class="flex p-xs margin-bottom-sm mb-sm">
+		<view class="flex-sub padding-sm margin-xs radius">
+			<van-circle
+			 value="{{ value }}"
+			 color="{{ gradientColor }}"
+			 text="已用{{value}}%"
+			 stroke-width="12"
+			 layer-color="#F1F2F6"
+			/>
+		</view>
+		<view class="flex-twice padding-sm margin-xs radius">
+			<view class="flex solid-bottom padding-sm justify-between text-black text-bold">
+				<text>剩余预算</text>
+				<text>{{budget-payAmount}}</text>
+			</view>
+			<view class="flex padding-left-sm padding-right-sm padding-top-sm justify-between text-sm">
+				<text>本月预算</text>
+				<text>{{budget}}</text>
+			</view>
+			<view class="flex padding-left-sm padding-right-sm justify-between text-sm">
+				<text>本月支出</text>
+				<text>{{payAmount}}</text>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class="cu-list menu-avatar">
+	<view
+	 class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}"
+	 wx:for="{{list}}"
+	 wx:key="index"
+	 bindtouchstart="ListTouchStart"
+	 bindtouchmove="ListTouchMove"
+	 bindtouchend="ListTouchEnd"
+	 data-target="move-box-{{index}}"
+	>
+		<view class="cu-avatar df" style="background-image:url(../../assets/icon/{{item.code}}.png);"></view>
+		<view class="content">
+			<view class="text-grey">{{item.name}}</view>
+			<view class="text-gray text-sm">
+				{{item.remark}}
+			</view>
+		</view>
+		<view class="action">
+			<view class="cu-tag round bg-olive light sm">预算：{{item.budget}}</view>
+			<view class="cu-tag round bg-red light sm">花费：{{item.payAmount}}</view>
+		</view>
+		<view class="move">
+			<view class="bg-grey">编辑</view>
+			<view class="bg-red">删除</view>
+		</view>
+	</view>
+</view>
+
+<van-dialog
+ use-slot
+ title="本月预算"
+ show="{{ show }}"
+ show-cancel-button
+ bind:close="onClose"
+ bind:confirm="changeBudget"
+>
+	<van-field
+	 value="{{ budget }}"
+	 placeholder="在此输入本月预算"
+	 border="{{ true }}"
+	 bind:change="onChange"
+	/>
+</van-dialog>
+

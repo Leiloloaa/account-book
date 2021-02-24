@@ -10,6 +10,7 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         modalName: '',
         show: false,
+        showAbout: false
     },
     onLoad: function() {
         // 获取用户信息
@@ -45,6 +46,22 @@ Page({
         })
     },
     onClose() {
-        this.setData({ show: false });
+        this.setData({ show: false, showAbout: false });
     },
+    toUrl(e) {
+        let type = e.currentTarget.dataset.type
+        if (type == 1) {
+            wx.navigateTo({
+                url: "/pages/plan/plan",
+            })
+        } else if (type == 2) {
+
+        } else if (type == 3) {
+
+        } else {
+            this.setData({
+                showAbout: true
+            })
+        }
+    }
 })

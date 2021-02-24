@@ -79,7 +79,7 @@
 			 data-type="07"
 			>
 				<image style="width: 50%; height:30px;" src="../../assets/icon/02.png" />
-				<text class="text-grey text-sm">其它</text>
+				<text class="text-grey text-sm">额外收入</text>
 			</van-grid-item>
 		</van-grid>
 	</van-tab>

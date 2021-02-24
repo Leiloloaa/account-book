@@ -25,7 +25,9 @@ Page({
         isAdd: true,
         showEqu: false,
         today: true,
-        haveEdit: false
+        haveEdit: false,
+        payAmount: '',
+        accountId: ''
     },
 
     getRemark(event) {
@@ -140,9 +142,9 @@ Page({
     },
 
     finishValue() {
+        const db = wx.cloud.database()
         if (this.data.haveEdit) {
             let data = wx.getStorageSync('editItem')
-            const db = wx.cloud.database()
             db.collection('day_consume').doc(data._id).remove({
                 success: res => {
                     wx.clearStorage()
@@ -152,8 +154,96 @@ Page({
                 }
             })
         }
-        console.log(this.data.value + '--' + this.data.type)
-        const db = wx.cloud.database()
+        // 修改支出数额
+        db.collection('account_details').get({
+            success: res => {
+                this.setData({
+                    payAmount: res.data[0].payAmount,
+                    accountId: res.data[0]._id,
+                })
+                let payAmounts = Number(this.data.payAmount) + Number(this.data.value)
+                db.collection('account_details').doc(this.data.accountId).update({
+                    data: {
+                        payAmount: payAmounts
+                    },
+                    success: function(res) {}
+                })
+            },
+            fail: err => {}
+        });
+        // 修改类型表
+        if (this.data.type == '01') {
+            db.collection('type_consume').where({
+                code: 1
+            }).get({
+                success: res => {
+                    db.collection('type_consume').doc('79550af26035c28f06cea06c4edc5dba').update({
+                        data: {
+                            payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
+                        },
+                        success: function(res) {}
+                    })
+                },
+                fail: err => {}
+            });
+        } else if (this.data.type == '02') {
+            db.collection('type_consume').where({
+                _id: '79550af26035c3ad06cf07d43e9428eb'
+            }).get({
+                success: res => {
+                    db.collection('type_consume').doc('79550af26035c3ad06cf07d43e9428eb').update({
+                        data: {
+                            payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
+                        },
+                        success: function(res) {}
+                    })
+                },
+                fail: err => {}
+            });
+        } else if (this.data.type == '03') {
+            db.collection('type_consume').where({
+                _id: 'b00064a76035c3e606dec8036d86c10d'
+            }).get({
+                success: res => {
+                    db.collection('type_consume').doc('b00064a76035c3e606dec8036d86c10d').update({
+                        data: {
+                            payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
+                        },
+                        success: function(res) {}
+                    })
+                },
+                fail: err => {}
+            });
+        } else if (this.data.type == '04') {
+            db.collection('type_consume').where({
+                _id: 'b00064a76035c41f06ded29335b09f8e'
+            }).get({
+                success: res => {
+                    db.collection('type_consume').doc('b00064a76035c41f06ded29335b09f8e').update({
+                        data: {
+                            payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
+                        },
+                        success: function(res) {}
+                    })
+                },
+                fail: err => {}
+            });
+        } else if (this.data.type == '05') {
+            db.collection('type_consume').where({
+                _id: 'b00064a76035c45506dedc162c3ad12f'
+            }).get({
+                success: res => {
+                    db.collection('type_consume').doc('b00064a76035c45506dedc162c3ad12f').update({
+                        data: {
+                            payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
+                        },
+                        success: function(res) {}
+                    })
+                },
+                fail: err => {}
+            });
+        }
+        // 添加数据
         db.collection('day_consume').add({
             data: {
                 consume_type: this.data.type,
@@ -180,10 +270,8 @@ Page({
                     icon: 'none',
                     title: '新增记录失败'
                 })
-                console.error('[数据库] [新增记录] 失败：', err)
             }
         })
-
     },
 
     show(event) {

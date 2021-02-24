@@ -10,10 +10,10 @@
 	</view>
 	<view class="middle">
 		<view class="title margin-bottom-sm">
-			月收入
+			月预算
 		</view>
 		<view class="">
-			暂未统计
+			{{budget}}
 		</view>
 	</view>
 	<view class="right">
@@ -21,7 +21,7 @@
 			月支出
 		</view>
 		<view class="">
-			暂未统计
+			{{payAmount}}
 		</view>
 	</view>
 </view>
@@ -257,7 +257,6 @@
 		</view>
 	</view>
 </view> -->
-<!-- <van-empty description="没有记录" wx:if="{{isEmpty}}" /> -->
 <van-popup
  show="{{ show }}"
  round
@@ -271,6 +270,8 @@
 	 bind:confirm="onConfirm"
 	 bind:cancel="onClose"
 	 formatter="{{ formatter }}"
+	 min-date="{{ minDate }}"
+	 max-date="{{ maxDate }}"
 	/>
 </van-popup>
 <van-action-sheet

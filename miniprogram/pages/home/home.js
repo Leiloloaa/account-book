@@ -7,6 +7,8 @@ Page({
     data: {
         show: false,
         currentDate: new Date().getTime(),
+        minDate: new Date(2021, 1, 1).getTime(),
+        maxDate: new Date().getTime(),
         formatter(type, value) {
             if (type === 'year') {
                 return `${value}年`;
@@ -19,17 +21,12 @@ Page({
         year: '',
         list: [],
         list1: [],
-        list2: [],
         nowTime: '',
         nowTime1: '',
-        nowTime2: '',
         imoney: 0,
         omoney: 0,
         imoney1: 0,
         omoney1: 0,
-        imoney2: 0,
-        omoney2: 0,
-        isEmpty: false,
         showAction: false,
         actions: [{
                 name: '编辑',
@@ -41,6 +38,8 @@ Page({
                 value: 2
             }
         ],
+        budget: '',
+        payAmount: ''
     },
 
     onSelect(event) {
@@ -66,7 +65,13 @@ Page({
 
     showData() {
         this.setData({
-            show: true
+            show: true,
+            list: [],
+            list1: [],
+            imoney: 0,
+            omoney: 0,
+            imoney1: 0,
+            omoney1: 0,
         })
     },
 
@@ -114,75 +119,19 @@ Page({
         let day1 = (Date.parse(this.data.nowTime) - 86400000)
         let day2 = (day1 - 86400000)
         this.setData({
-            imoney: 0,
-            omoney: 0,
-            imoney1: 0,
-            omoney1: 0,
-            imoney2: 0,
-            omoney2: 0,
             nowTime1: this.changeTime(day1),
             nowTime2: this.changeTime(day2),
         })
         const db = wx.cloud.database()
-        db.collection('day_consume').where({
-            consume_time: this.data.nowTime1,
-        }).get({
+        db.collection('account_details').get({
             success: res => {
                 this.setData({
-                    list1: res.data,
+                    budget: res.data[0].budget,
+                    payAmount: res.data[0].payAmount
                 })
-                console.log(this.data.list1)
-                if (this.data.list1.length >= 1) {
-                    for (var i = 0; i < this.data.list1.length; i++) {
-                        if (this.data.list1[i].consume_type == '01' && this.data.list1[i].consume_type == '02' && this.data.list1[i].consume_type == '03' && this.data.list1[i].consume_type == '04' && this.data.list1[i].consume_type == '05') {
-                            this.setData({
-                                omoney1: (Number(this.data.omoney) + Number(this.data.list1[i].consume_value)),
-                            })
-                        } else {
-                            this.setData({
-                                imoney1: (Number(this.data.imoney) + Number(this.data.list1[i].consume_value)),
-                            })
-                        }
-                    }
-                }
             },
-            fail: err => {
-                wx.showToast({
-                    icon: 'none',
-                    title: '查询记录失败'
-                })
-                console.error('[数据库] [查询记录] 失败：', err)
-            }
+            fail: err => {}
         });
-        // db.collection('day_consume').where({
-        //     consume_time: this.data.nowTime2,
-        // }).get({
-        //     success: res => {
-        //         this.setData({
-        //             list2: res.data,
-        //         })
-        //         if (this.data.list2.length >= 1) {
-        //             for (var i = 0; i < this.data.list2.length; i++) {
-        //                 if (this.data.list2[i].consume_type == '01' && this.data.list2[i].consume_type == '02' && this.data.list2[i].consume_type == '03' && this.data.list2[i].consume_type == '04' && this.data.list2[i].consume_type == '05') {
-        //                     this.setData({
-        //                         omoney2: (Number(this.data.omoney) + Number(this.data.list2[i].consume_value)),
-        //                     })
-        //                 } else {
-        //                     this.setData({
-        //                         imoney2: (Number(this.data.imoney) + Number(this.data.list2[i].consume_value)),
-        //                     })
-        //                 }
-        //             }
-        //         }
-        //     },
-        //     fail: err => {
-        //         wx.showToast({
-        //             icon: 'none',
-        //             title: '查询记录失败'
-        //         })
-        //         console.error('[数据库] [查询记录] 失败：', err)
-        //     }
-        // });
         db.collection('day_consume').where({
             consume_time: this.data.nowTime,
         }).get({
@@ -191,9 +140,6 @@ Page({
                     list: res.data,
                 })
                 if (this.data.list.length >= 1) {
-                    this.setData({
-                        isEmpty: false,
-                    })
                     for (var i = 0; i < this.data.list.length; i++) {
                         if (this.data.list[i].consume_type == '01' && this.data.list[i].consume_type == '02' && this.data.list[i].consume_type == '03' && this.data.list[i].consume_type == '04' && this.data.list[i].consume_type == '05') {
                             this.setData({
@@ -203,6 +149,7 @@ Page({
                             this.setData({
                                 imoney: (Number(this.data.imoney) + Number(this.data.list[i].consume_value)),
                             })
+
                         }
                     }
                 } else {
@@ -216,9 +163,36 @@ Page({
                     icon: 'none',
                     title: '查询记录失败'
                 })
-                console.error('[数据库] [查询记录] 失败：', err)
             }
         })
+        db.collection('day_consume').where({
+            consume_time: this.changeTime(day1),
+        }).get({
+            success: res => {
+                this.setData({
+                    list1: res.data,
+                })
+                if (this.data.list1.length >= 1) {
+                    for (var i = 0; i < this.data.list1.length; i++) {
+                        if (this.data.list1[i].consume_type == '01' && this.data.list1[i].consume_type == '02' && this.data.list1[i].consume_type == '03' && this.data.list1[i].consume_type == '04' && this.data.list1[i].consume_type == '05') {
+                            this.setData({
+                                omoney1: (Number(this.data.omoney1) + Number(this.data.list1[i].consume_value)),
+                            })
+                        } else {
+                            this.setData({
+                                imoney1: (Number(this.data.imoney1) + Number(this.data.list1[i].consume_value)),
+                            })
+                        }
+                    }
+                }
+            },
+            fail: err => {
+                wx.showToast({
+                    icon: 'none',
+                    title: '查询记录失败'
+                })
+            }
+        });
     },
 
     onConfirm(event) {

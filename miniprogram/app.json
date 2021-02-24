@@ -1,8 +1,9 @@
 {
     "pages": [
+        "pages/my/my",
+        "pages/plan/plan",
         "pages/home/home",
         "pages/account/account",
-        "pages/my/my",
         "pages/index/index",
         "pages/userConsole/userConsole",
         "pages/storageConsole/storageConsole",
@@ -60,6 +61,8 @@
         "van-popup": "./dist/popup/index",
         "van-datetime-picker": "./dist/datetime-picker/index",
         "van-empty": "./dist/empty/index",
-        "van-action-sheet": "./dist/action-sheet/index"
+        "van-action-sheet": "./dist/action-sheet/index",
+        "van-circle": "./dist/circle/index",
+        "van-dialog": "./dist/dialog/index"
     }
 }
