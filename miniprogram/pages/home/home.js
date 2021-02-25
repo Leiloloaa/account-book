@@ -50,17 +50,100 @@ Page({
         } else {
             let data = wx.getStorageSync('editItem')
             const db = wx.cloud.database()
-            db.collection('day_consume').doc(data._id).remove({
+            db.collection('account_details').get({
                 success: res => {
-                    console.log('删除成功')
-                    this.onQuery()
+                    let payAmounts = Number(res.data[0].payAmount) - Number(data.consume_value)
+                    db.collection('account_details').doc(res.data[0]._id).update({
+                        data: {
+                            payAmount: payAmounts
+                        },
+                        success: function(res) {
+                            db.collection('day_consume').doc(data._id).remove({
+                                success: res => {
+                                    this.onQuery()
+                                        // 修改类型表
+                                    if (data.consume_type == '01') {
+                                        db.collection('type_consume').where({
+                                            code: 1
+                                        }).get({
+                                            success: res => {
+                                                db.collection('type_consume').doc('79550af26035c28f06cea06c4edc5dba').update({
+                                                    data: {
+                                                        payAmount: Number(res.data[0].payAmount) - Number(data.consume_value)
+                                                    },
+                                                    success: function(res) {}
+                                                })
+                                            },
+                                            fail: err => {}
+                                        });
+                                    } else if (data.consume_type == '02') {
+                                        db.collection('type_consume').where({
+                                            _id: '79550af26035c3ad06cf07d43e9428eb'
+                                        }).get({
+                                            success: res => {
+                                                db.collection('type_consume').doc('79550af26035c3ad06cf07d43e9428eb').update({
+                                                    data: {
+                                                        payAmount: Number(res.data[0].payAmount) - Number(data.consume_value)
+                                                    },
+                                                    success: function(res) {}
+                                                })
+                                            },
+                                            fail: err => {}
+                                        });
+                                    } else if (data.consume_type == '03') {
+                                        db.collection('type_consume').where({
+                                            _id: 'b00064a76035c3e606dec8036d86c10d'
+                                        }).get({
+                                            success: res => {
+                                                db.collection('type_consume').doc('b00064a76035c3e606dec8036d86c10d').update({
+                                                    data: {
+                                                        payAmount: Number(res.data[0].payAmount) - Number(data.consume_value)
+                                                    },
+                                                    success: function(res) {}
+                                                })
+                                            },
+                                            fail: err => {}
+                                        });
+                                    } else if (data.consume_type == '04') {
+                                        db.collection('type_consume').where({
+                                            _id: 'b00064a76035c41f06ded29335b09f8e'
+                                        }).get({
+                                            success: res => {
+                                                db.collection('type_consume').doc('b00064a76035c41f06ded29335b09f8e').update({
+                                                    data: {
+                                                        payAmount: Number(res.data[0].payAmount) - Number(data.consume_value)
+                                                    },
+                                                    success: function(res) {}
+                                                })
+                                            },
+                                            fail: err => {}
+                                        });
+                                    } else if (data.consume_type == '05') {
+                                        db.collection('type_consume').where({
+                                            _id: 'b00064a76035c45506dedc162c3ad12f'
+                                        }).get({
+                                            success: res => {
+                                                db.collection('type_consume').doc('b00064a76035c45506dedc162c3ad12f').update({
+                                                    data: {
+                                                        payAmount: Number(res.data[0].payAmount) - Number(data.consume_value)
+                                                    },
+                                                    success: function(res) {}
+                                                })
+                                            },
+                                            fail: err => {}
+                                        });
+                                    }
+                                },
+                                fail: err => {
+                                    console.error('[数据库] [删除记录] 失败：', err)
+                                }
+                            })
+                        }
+                    })
                 },
-                fail: err => {
-                    console.error('[数据库] [删除记录] 失败：', err)
-                }
-            })
+                fail: err => {}
+            });
         }
-        console.log(event.detail);
     },
 
     showData() {
