@@ -1,9 +1,9 @@
 {
     "pages": [
+        "pages/account/account",
         "pages/my/my",
         "pages/plan/plan",
         "pages/home/home",
-        "pages/account/account",
         "pages/index/index",
         "pages/userConsole/userConsole",
         "pages/storageConsole/storageConsole",

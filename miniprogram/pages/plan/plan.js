@@ -14,7 +14,8 @@ Page({
         budget: '',
         list: [],
         budgetId: '',
-        payAmount: ''
+        payAmount: '',
+        month: ''
     },
 
     onClose() {
@@ -98,9 +99,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
-        this.query()
-    },
+    onLoad: function(options) {},
 
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -113,9 +112,26 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        this.setData({
+            month: this.changeMonthTime(new Date().getTime()),
+        })
+        this.query()
     },
 
+    changeMonthTime(time) {
+        if (time) {
+            var oDate = new Date(time * 1),
+                oMonth = oDate.getMonth() + 1,
+                oTime = this.change(oMonth)
+            return oTime
+        } else {
+            return ""
+        }
+    },
+
+    change(num) {
+        return num < 10 ? "0" + num : "" + num
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

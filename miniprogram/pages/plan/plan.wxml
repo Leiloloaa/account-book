@@ -1,6 +1,6 @@
 <view class="padding-right padding-left bg-white">
 	<view class="flex padding-left-sm padding-right-sm padding-top-sm justify-between text-sm">
-		<text>02月总预算</text>
+		<text>{{month}}月总预算</text>
 		<text bind:tap="showAlert">编辑</text>
 	</view>
 	<view class="flex p-xs margin-bottom-sm mb-sm">
@@ -47,7 +47,7 @@
 				{{item.remark}}
 			</view>
 		</view>
-		<view class="action">
+		<view class="action margin-right-sm">
 			<view class="cu-tag round bg-olive light sm">预算：{{item.budget}}</view>
 			<view class="cu-tag round bg-red light sm">花费：{{item.payAmount}}</view>
 		</view>

@@ -188,7 +188,7 @@ Page({
             });
         } else if (this.data.type == '02') {
             db.collection('type_consume').where({
-                _id: '79550af26035c3ad06cf07d43e9428eb'
+                code: 2
             }).get({
                 success: res => {
                     db.collection('type_consume').doc('79550af26035c3ad06cf07d43e9428eb').update({
@@ -202,7 +202,7 @@ Page({
             });
         } else if (this.data.type == '03') {
             db.collection('type_consume').where({
-                _id: 'b00064a76035c3e606dec8036d86c10d'
+                code: 3
             }).get({
                 success: res => {
                     db.collection('type_consume').doc('b00064a76035c3e606dec8036d86c10d').update({
@@ -216,7 +216,7 @@ Page({
             });
         } else if (this.data.type == '04') {
             db.collection('type_consume').where({
-                _id: 'b00064a76035c41f06ded29335b09f8e'
+                code: 4
             }).get({
                 success: res => {
                     db.collection('type_consume').doc('b00064a76035c41f06ded29335b09f8e').update({
@@ -230,7 +230,7 @@ Page({
             });
         } else if (this.data.type == '05') {
             db.collection('type_consume').where({
-                _id: 'b00064a76035c45506dedc162c3ad12f'
+                code: 5
             }).get({
                 success: res => {
                     db.collection('type_consume').doc('b00064a76035c45506dedc162c3ad12f').update({

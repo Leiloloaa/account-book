@@ -29,3 +29,7 @@
     background-color: var(--grid-item-content-background-color, #69EAFF) !important;
     border-radius: 50%;
 }
+
+.cu-tag+.cu-tag {
+    margin-left: 0rpx;
+}

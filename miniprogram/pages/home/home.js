@@ -326,6 +326,14 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
+        this.setData({
+            list: [],
+            list1: [],
+            imoney: 0,
+            omoney: 0,
+            imoney1: 0,
+            omoney1: 0,
+        })
         this.onQuery()
     },
 
