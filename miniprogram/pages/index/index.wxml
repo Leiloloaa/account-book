@@ -10,11 +10,10 @@
 		 size="default"
 		></button>
 		<view class="userinfo-nickname-wrapper">
-			<button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+			<button class="userinfo-nickname" bindtap="onGetOpenid">鲸鱼手记，欢迎您！</button>
 		</view>
 	</view>
 
-	<van-button type="primary">按钮</van-button>
 	<!-- 上传图片 -->
 	<view class="uploader">
 		<view class="uploader-text" bindtap="doUpload">

@@ -40,7 +40,7 @@
 	 bindtouchend="ListTouchEnd"
 	 data-target="move-box-{{index}}"
 	>
-		<view class="cu-avatar df" style="background-image:url(../../assets/icon/{{item.code}}.png);"></view>
+		<view class="cu-avatar round df" style="background-image:url(../../assets/icon/{{item.code}}.png);"></view>
 		<view class="content">
 			<view class="text-grey">{{item.name}}</view>
 			<view class="text-gray text-sm">

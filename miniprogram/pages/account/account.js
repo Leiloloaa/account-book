@@ -201,15 +201,19 @@ Page({
                 fail: err => {}
             });
         } else if (this.data.type == '03') {
+            console.log('执行了')
             db.collection('type_consume').where({
                 code: 3
             }).get({
                 success: res => {
+                    console.log(res)
                     db.collection('type_consume').doc('b00064a76035c3e606dec8036d86c10d').update({
                         data: {
                             payAmount: Number(res.data[0].payAmount) + Number(this.data.value)
                         },
-                        success: function(res) {}
+                        success: function(data) {
+                            console.log(data)
+                        }
                     })
                 },
                 fail: err => {}
@@ -279,6 +283,27 @@ Page({
             show_key: true,
             type: event.currentTarget.dataset.type
         })
+        if (event.currentTarget.dataset.type == '01') {
+            this.setData({
+                remark: '餐饮'
+            })
+        } else if (event.currentTarget.dataset.type == '02') {
+            this.setData({
+                remark: '购物'
+            })
+        } else if (event.currentTarget.dataset.type == '03') {
+            this.setData({
+                remark: '蔬菜'
+            })
+        } else if (event.currentTarget.dataset.type == '04') {
+            this.setData({
+                remark: '交通卡充值'
+            })
+        } else if (event.currentTarget.dataset.type == '05') {
+            this.setData({
+                remark: '其它'
+            })
+        }
     },
 
     showData() {
@@ -305,7 +330,6 @@ Page({
                 input_data: nowTime
             })
         }
-
     },
 
     onConfirm(event) {
@@ -361,9 +385,27 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        this.onGetOpenid()
     },
 
+    onGetOpenid: function() {
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                let openIds = ['oJi955LxRNmV3oxR_T24X-D2ayqI', 'oJi955N_iXJSFxV7YU77dh-fjmCA']
+                if (!openIds.includes(res.result.openid)) {
+                    wx.reLaunch({
+                        url: '../index/index',
+                    })
+                }
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
