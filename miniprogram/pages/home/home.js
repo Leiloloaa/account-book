@@ -334,9 +334,25 @@ Page({
             imoney1: 0,
             omoney1: 0,
         })
-        this.onQuery()
+        this.onGetOpenid()
     },
 
+    onGetOpenid: function() {
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                let openIds = ['oJi955LxRNmV3oxR_T24X-D2ayqI', 'oJi955N_iXJSFxV7YU77dh-fjmCA']
+                if (openIds.includes(res.result.openid)) {
+                    this.onQuery()
+                }
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

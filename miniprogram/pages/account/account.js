@@ -27,7 +27,8 @@ Page({
         today: true,
         haveEdit: false,
         payAmount: '',
-        accountId: ''
+        accountId: '',
+        isPower: true
     },
 
     getRemark(event) {
@@ -142,6 +143,9 @@ Page({
     },
 
     finishValue() {
+        if (!this.data.isPower) {
+            return 1
+        }
         const db = wx.cloud.database()
         if (this.data.haveEdit) {
             let data = wx.getStorageSync('editItem')
@@ -396,8 +400,8 @@ Page({
             success: res => {
                 let openIds = ['oJi955LxRNmV3oxR_T24X-D2ayqI', 'oJi955N_iXJSFxV7YU77dh-fjmCA']
                 if (!openIds.includes(res.result.openid)) {
-                    wx.reLaunch({
-                        url: '../index/index',
+                    this.setData({
+                        isPower: false
                     })
                 }
             },

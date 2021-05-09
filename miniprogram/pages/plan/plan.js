@@ -115,9 +115,24 @@ Page({
         this.setData({
             month: this.changeMonthTime(new Date().getTime()),
         })
-        this.query()
+        this.onGetOpenid()
     },
-
+    onGetOpenid: function() {
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                let openIds = ['oJi955LxRNmV3oxR_T24X-D2ayqI', 'oJi955N_iXJSFxV7YU77dh-fjmCA']
+                if (openIds.includes(res.result.openid)) {
+                    this.query()
+                }
+            },
+            fail: err => {
+                console.error('[云函数] [login] 调用失败', err)
+            }
+        })
+    },
     changeMonthTime(time) {
         if (time) {
             var oDate = new Date(time * 1),
